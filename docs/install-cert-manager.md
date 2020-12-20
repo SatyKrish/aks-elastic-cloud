@@ -23,13 +23,13 @@ $ cat <<EOF | kubectl apply -n ingress -f -
 apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-staging
+  name: letsencrypt
 spec:
   acme:
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: user@contoso.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: demo@example.com
     privateKeySecretRef:
-      name: letsencrypt-staging
+      name: letsencrypt
     solvers:
     - http01:
         ingress:
