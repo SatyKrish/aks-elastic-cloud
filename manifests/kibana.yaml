@@ -1,30 +1,36 @@
-apiVersion: kibana.k8s.elastic.co/v1beta1
+apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
-  name: d3m0
+  name: demo
 spec:
-  version: 7.4.2
+  version: 7.10.1
   count: 1
   elasticsearchRef:
-    name: d3m0
+    name: demo
   http:
     tls:
       selfSignedCertificate:
-        disabled: true       
+        disabled: true     
 ---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: kibana-ingress
+  name: demo-kb-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: nginx    
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
- rules:
- - host: kibana.domain.example
-   http:
-     paths:
-     - path: /
-       backend:
-         serviceName: d3m0-kb-http
-         servicePort: 5601
+  tls:
+  - hosts:
+    - demo.siem-fortidm.com
+    secretName: siem-tls-secret 
+  rules:
+  - host: demo.siem-fortidm.com
+    http:
+      paths:
+      - path: /(.*)
+        backend:
+          serviceName: demo-kb-http
+          servicePort: 5601
