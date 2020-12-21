@@ -16,97 +16,96 @@ metadata:
 spec:
   version: 7.10.1
   nodeSets:
-  - name: zone-1
-    count: 1
-    config:
-      node.attr.zone: southeastasia-1
-      cluster.routing.allocation.awareness.attributes: zone
-    podTemplate:
-      spec:
-        initContainers:
-        - name: sysctl
-          securityContext:
-            privileged: true
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: topology.kubernetes.io/zone
-                  operator: In
-                  values:
-                  - southeastasia-1
-    volumeClaimTemplates:
-    - metadata:
-        name: elasticsearch-data
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi
-        storageClassName: elasticsearch-storage
-  - name: zone-2
-    count: 1
-    config:
-      node.attr.zone: southeastasia-2
-      cluster.routing.allocation.awareness.attributes: zone
-    podTemplate:
-      spec:
-        initContainers:
-        - name: sysctl
-          securityContext:
-            privileged: true
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: topology.kubernetes.io/zone
-                  operator: In
-                  values:
-                  - southeastasia-2
-    volumeClaimTemplates:
-    - metadata:
-        name: elasticsearch-data
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi
-        storageClassName: elasticsearch-storage
-  - name: zone-3
-    count: 1
-    config:
-      node.attr.zone: southeastasia-3
-      cluster.routing.allocation.awareness.attributes: zone
-    podTemplate:
-      spec:
-        initContainers:
-        - name: sysctl
-          securityContext:
-            privileged: true
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: topology.kubernetes.io/zone
-                  operator: In
-                  values:
-                  - southeastasia-3
-    volumeClaimTemplates:
-    - metadata:
-        name: elasticsearch-data
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi
-        storageClassName: elasticsearch-storage
-
+    - name: zone-1
+      count: 1
+      config:
+        node.attr.zone: southeastasia-1
+        cluster.routing.allocation.awareness.attributes: zone
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+              command: ["sh", "-c", "sysctl -w vm.max_map_count=262144"]
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: topology.kubernetes.io/zone
+                        operator: In
+                        values:
+                          - southeastasia-1
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 1Gi
+            storageClassName: elasticsearch-storage
+    - name: zone-2
+      count: 1
+      config:
+        node.attr.zone: southeastasia-2
+        cluster.routing.allocation.awareness.attributes: zone
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+              command: ["sh", "-c", "sysctl -w vm.max_map_count=262144"]
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: topology.kubernetes.io/zone
+                        operator: In
+                        values:
+                          - southeastasia-2
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 1Gi
+            storageClassName: elasticsearch-storage
+    - name: zone-3
+      count: 1
+      config:
+        node.attr.zone: southeastasia-3
+        cluster.routing.allocation.awareness.attributes: zone
+      podTemplate:
+        spec:
+          initContainers:
+            - name: sysctl
+              securityContext:
+                privileged: true
+              command: ["sh", "-c", "sysctl -w vm.max_map_count=262144"]
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: topology.kubernetes.io/zone
+                        operator: In
+                        values:
+                          - southeastasia-3
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 1Gi
+            storageClassName: elasticsearch-storage
